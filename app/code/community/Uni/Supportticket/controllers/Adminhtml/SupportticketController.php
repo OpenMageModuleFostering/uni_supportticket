@@ -75,6 +75,7 @@ class Uni_Supportticket_Adminhtml_SupportticketController extends Mage_Adminhtml
      */
     public function saveAction() {
         $post_data = $this->getRequest()->getPost();
+     
         $_helper = Mage::helper('supportticket');
         if (isset($post_data['ticket_repliess']) && $post_data['ticket_repliess']) {
             $post_data['ticket_replies'] = $post_data['ticket_repliess'];

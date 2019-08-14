@@ -102,8 +102,9 @@ class Uni_Supportticket_Adminhtml_SupportticketreplyController extends Mage_Admi
 
                 $model = Mage::getModel("supportticket/supportticketreply")
                         ->addData($post_data)
-                        ->setId($this->getRequest()->getParam("id"))
-                        ->save();
+                        ->setId($this->getRequest()->getParam("id"));
+               
+                       $model->save();
 
                 Mage::getSingleton("adminhtml/session")->addSuccess(Mage::helper("adminhtml")->__("Supportticketreply was successfully saved"));
                 Mage::getSingleton("adminhtml/session")->setSupportticketreplyData(false);

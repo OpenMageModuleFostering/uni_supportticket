@@ -38,10 +38,6 @@ class Uni_Supportticket_Block_Adminhtml_Supportticketreplywithticketid_Grid exte
             "index" => "user_name",
             'filter' => false,
         ));
-//				$this->addColumn("ticket_attachment", array(
-//				"header" => Mage::helper("supportticket")->__("Ticket Attachment"),
-//				"index" => "ticket_attachment",
-//				));
         $this->addColumn("reply_time", array(
             "header" => Mage::helper("supportticket")->__("Reply Time"),
             "index" => "reply_time",
@@ -57,8 +53,6 @@ class Uni_Supportticket_Block_Adminhtml_Supportticketreplywithticketid_Grid exte
             "index" => "is_admin",
             'renderer' => new Uni_Supportticket_Block_Adminhtml_Supportticketreplywithticketid_Renderer_Userrole(),
         ));
-//        $this->addExportType('*/*/exportCsv', Mage::helper('sales')->__('CSV'));
-//        $this->addExportType('*/*/exportExcel', Mage::helper('sales')->__('Excel'));
 
         return parent::_prepareColumns();
     }

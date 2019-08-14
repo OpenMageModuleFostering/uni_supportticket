@@ -36,7 +36,11 @@ class Uni_Supportticket_SupportticketController extends Mage_Core_Controller_Fro
     
 
     public function saveAction() {
+     
         $post_data = $this->getRequest()->getPost();
+        $abc=$post_data['ticket_department'];
+       
+
         $_helper = Mage::helper('supportticket');
 
         if ($post_data) {
@@ -77,14 +81,18 @@ class Uni_Supportticket_SupportticketController extends Mage_Core_Controller_Fro
                 $date = date('m/d/Y h:i:s a', time());
                 $model = Mage::getModel("supportticket/supportticket")
                         ->addData($post_data)
+                        
                         ->setUpdateTime($date)
                         ->setCreateTime($date)
+                     
                         ->setId($this->getRequest()->getParam("id"));
+               
                 if ($_FILES['attachment']['name'] == ''):
                     $model->setTicketAttachment('No Attachment Found');
                 else:
                     $model->setTicketAttachment($newFilename);
                 endif;
+               $model->setDepartment($abc);
                 $model->save();
                 $emailTemplate = Mage::getModel('core/email_template')->loadDefault('supportticket_email_email_template');
 
@@ -107,6 +115,7 @@ class Uni_Supportticket_SupportticketController extends Mage_Core_Controller_Fro
                 foreach ($departments as $key => $value) {
                     if ($key == $post_data['ticket_department']) {
                         $post_data['ticket_department'] = $value;
+                         
                     }
                 }
                 $adminEmail = Mage::getStoreConfig('support_ticket_ultimate/general_email_settings/supervisor_email');

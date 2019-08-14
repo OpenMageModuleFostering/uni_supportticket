@@ -3,11 +3,14 @@
 
 <?php
 $customerData = Mage::getSingleton('customer/session')->getCustomer();
-$_datasets = $this->getDatasets()->addFieldToFilter('user_id', $customerData->getId())->getData();
+$_datasets = $this->getDatasets()->addFieldToFilter('user_id', $customerData->getId());
+//$_datasets = $this->getDatasets();
+//Zend_Debug::dump($_datasets);
 $_helper = Mage::helper('supportticket');
 $_tickStatus = $_helper->getTicketStatuses();
 $_tickPriority = $_helper->getTicketPrioritys();
 $_tickDepartment = $_helper->getTicketDepartments();
+//Zend_Debug::dump($_tickDepartment);
 ?>
 <div class="page-head">
     <h3><?php echo $this->__('Support Ticket') ?></h3>
@@ -28,10 +31,13 @@ $_tickDepartment = $_helper->getTicketDepartments();
         <tbody>
             <?php foreach ($_datasets as $_dataset): ?>
                 <tr>
+                
                     <td  valign="middle"   style="vertical-align:middle;"><?php echo $_dataset['ticket_id'] ?></td>
                     <?php
                     foreach ($_tickDepartment as $value):
-                        if ($_dataset['department'] == $value['value']) :
+                     
+//                          Zend_debug::dump($value);
+                        if ($_dataset['department']== $value['value']) :
                             ?>
                             <td  valign="middle"   style="vertical-align:middle;"><?php echo $value['label'] ?></td>
                         <?php endif;

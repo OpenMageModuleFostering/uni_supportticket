@@ -36,7 +36,6 @@ class Uni_Supportticket_Helper_Data extends Mage_Core_Helper_Abstract {
      */
     public function getTicketDepartments() {
         $_collection = Mage::getModel('supportticket/supportticketdepartment')->getCollection();
-
         $_priority = array();
         foreach ($_collection as $values) {
             if ($values['dep_status'] == 0) {
@@ -44,6 +43,7 @@ class Uni_Supportticket_Helper_Data extends Mage_Core_Helper_Abstract {
             }
         }
         return $_priority;
+            
     }
 
     /*

@@ -52,7 +52,7 @@ class Uni_Supportticket_SupportticketreplyController extends Mage_Core_Controlle
                         $uploader->setFilesDispersion(false);
                         $filename = "File-" . time() . $_FILES['ticket_attachment']['name'];
                         $filename = str_replace(' ', '-', $filename);
-                        $path = Mage::getBaseDir('media') . DS . 'supportticketreply' . DS;
+                        $path = Mage::getBaseDir('media') . DS . 'supportticket' . DS;
                         if (!is_dir($path)) {
                             mkdir($path, 0777, true);
                         }
@@ -88,7 +88,7 @@ class Uni_Supportticket_SupportticketreplyController extends Mage_Core_Controlle
                 $model->save();
 
                 $emailTemplate = Mage::getModel('core/email_template')->loadDefault('supportticketreply_email_email_template');
-                $attachmentFilePath = Mage::getBaseDir('media') . DS . 'supportticketreply' . DS . $filename;
+                $attachmentFilePath = Mage::getBaseDir('media') . DS . 'supportticket' . DS . $filename;
                 if ($_FILES['ticket_attachment']['name']) {
                     if (file_exists($attachmentFilePath)) {
                         $fileContents = file_get_contents($attachmentFilePath);
@@ -144,7 +144,7 @@ class Uni_Supportticket_SupportticketreplyController extends Mage_Core_Controlle
         if ($customer_data) {
             $filename = $customer_data['ticket_attachment'];
         }
-        $filepath = Mage::getBaseDir('media') . DS . 'supportticketreply' . DS . $filename;
+        $filepath = Mage::getBaseDir('media') . DS . 'supportticket' . DS . $filename;
 
         if (!is_file($filepath) || !is_readable($filepath)) {
             throw new Exception ( );

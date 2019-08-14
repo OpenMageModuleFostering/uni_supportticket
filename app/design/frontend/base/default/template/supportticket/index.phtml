@@ -24,12 +24,10 @@
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 ?>
-
 <?php
 $_helper = Mage::helper('supportticket');
 $_status = $_helper->getTicketDepartments();
 $_prioritys = $_helper->getTicketPrioritys();
-
 echo $this->getChildHtml('supportticket_supportticket');
 $customer = Mage::getSingleton('customer/session')->getCustomer();
 ?>
@@ -77,7 +75,6 @@ $customer = Mage::getSingleton('customer/session')->getCustomer();
                     <input name="ticket_subject" id="ticket_subject" title="<?php echo Mage::helper('supportticket')->__('Subject') ?>" value="" class="input-text" type="text" />
                 </div>
             </li>
-            
             <li class="wide">
                 <label for="ticket_message" class="required"><em>*</em><?php echo Mage::helper('supportticket')->__('Message') ?></label>
                 <div class="input-box">
@@ -90,7 +87,6 @@ $customer = Mage::getSingleton('customer/session')->getCustomer();
                     <div class="file-upload btn btn-primary"><span><?php echo $this->__('Upload') ?></span>
                         <input name="attachment" id="attachment" title="<?php echo Mage::helper('supportticket')->__('ATTACHMENT') ?>"  class="input-file upload" type="file" />
                     </div>
-
                 </div>
             </li>
         </ul>
