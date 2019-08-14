@@ -1,0 +1,59 @@
+
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+
+<?php
+$customerData = Mage::getSingleton('customer/session')->getCustomer();
+$_datasets = $this->getDatasets()->addFieldToFilter('user_id', $customerData->getId())->getData();
+$_helper = Mage::helper('supportticket');
+$_tickStatus = $_helper->getTicketStatuses();
+$_tickPriority = $_helper->getTicketPrioritys();
+$_tickDepartment = $_helper->getTicketDepartments();
+?>
+<div class="page-head">
+    <h3><?php echo $this->__('Support Ticket') ?></h3>
+</div>
+<?php echo $this->getPagerHtml(); ?>
+<?php if (count($_datasets)): ?>
+    <table cellspacing="0" class="data-table" id="data-table">
+        <thead>
+            <tr>
+                <th><?php echo $this->__('ticket id') ?></th>
+                <th><?php echo $this->__('department') ?></th>
+                <th><?php echo $this->__('ticket subject') ?></th>
+                <th><?php echo $this->__('reply count') ?></th>
+                <th><?php echo $this->__('ticket status') ?></th>
+                <th> &nbsp; </th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($_datasets as $_dataset): ?>
+                <tr>
+                    <td  valign="middle"   style="vertical-align:middle;"><?php echo $_dataset['ticket_id'] ?></td>
+                    <?php
+                    foreach ($_tickDepartment as $value):
+                        if ($_dataset['department'] == $value['value']) :
+                            ?>
+                            <td  valign="middle"   style="vertical-align:middle;"><?php echo $value['label'] ?></td>
+                        <?php endif;
+                    endforeach;
+                    ?>
+                    <td  valign="middle"   style="vertical-align:middle;"><?php echo $_dataset['ticket_subject'] ?></td>
+                    <td  valign="middle"   style="vertical-align:middle;"><?php echo $_dataset['reply_count'] ?></td>
+                    <?php
+                    foreach ($_tickStatus as $value):
+                        if ($_dataset['ticket_status'] == $value['value']) :
+                            ?>
+                            <td  valign="middle"   style="vertical-align:middle;"><?php echo $value['label'] ?></td>
+                    <?php endif;
+                endforeach;
+                ?>
+                    <td  valign="middle"   style="vertical-align:middle;"><a href="<?php echo $this->getUrl('supportticket/supportticket/index', array('id' => $_dataset['entity_id'])) ?>" ><?php echo($this->__('View')) ?></a></td>
+                </tr>
+    <?php endforeach; ?>
+        </tbody>
+    </table>
+    <script type="text/javascript">decorateTable('data-table')</script>
+    <?php echo $this->getPagerHtml(); ?>
+<?php else: ?>
+    <p><?php echo $this->__('You have submited no data.'); ?></p>
+<?php endif ?>

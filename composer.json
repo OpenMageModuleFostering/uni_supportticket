@@ -1,0 +1,17 @@
+{
+    "name": "OpenMageModuleFostering/Uni_Supportticket",
+    "type": "magento-module",
+    "license": "Open-Software-License-(OSL)",
+    "homepage": "",
+    "description": "Magento Support Ticket module provides the facility to submit a ticket assigned to specific department, priority and revert back with explanatory information.
+",
+    "authors": [
+    {
+        "name": "Unicode Systems",
+        "email": "magento@unicodesystems.in"
+    }
+],
+    "suggest": {
+        "magento-hackathon/magento-composer-installer": "*"
+    }
+}

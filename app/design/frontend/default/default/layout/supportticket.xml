@@ -1,0 +1,39 @@
+<?xml version="1.0"?>   
+<layout version="0.1.0">   
+  <supportticket_index_index>   
+    <update handle="customer_account"/>
+    <reference name="my.account.wrapper">
+        <block type="supportticket/index" name="supportticket_index" template="supportticket/index.phtml">
+        <block type="supportticket/supportticket" name="supportticket_supportticket" template="supportticket/supportticket.phtml"/>
+        </block>   
+    </reference>   
+  </supportticket_index_index>  
+  
+  <supportticket_supportticket_index>
+<update handle="customer_account"/>
+    <reference name="my.account.wrapper">
+        <block type="supportticket/supportticket" name="supportticket_supportticketview" template="supportticket/view.phtml">
+            <block type="supportticket/supportticketreply" name="supportticket_supportticketreply" template="supportticket/supportticketreply.phtml"/>   
+        </block>   
+    </reference>
+  </supportticket_supportticket_index> 
+  
+  <supportticket_supportticketreply_index>
+    <reference name="root">   
+      <action method="setTemplate"><template>page/1column.phtml</template></action>   
+    </reference>   
+    <reference name="content">   
+    </reference>
+  </supportticket_supportticketreply_index>
+  
+  <customer_account>
+        <reference name="customer_account_navigation">
+            <action method="addLink" translate="label" module="supportticket">
+                <name>supportticket</name>
+                <path>supportticket</path>
+                <label>Support Ticket</label>
+            </action>
+        </reference>
+    </customer_account>  
+</layout>   
+	

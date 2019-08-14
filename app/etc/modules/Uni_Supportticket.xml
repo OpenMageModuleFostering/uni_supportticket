@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Uni_Supportticket>
+      <active>true</active>
+      <codePool>community</codePool>
+      <version>0.1.0</version>
+    </Uni_Supportticket>
+  </modules>
+</config>

@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+  <supportticket_adminhtml_supportticketbackend_index>
+	<reference name="content">
+	  <block type="supportticket/adminhtml_supportticketbackend" name="supportticketbackend" template="supportticket/supportticketbackend.phtml"/>
+	</reference>
+  </supportticket_adminhtml_supportticketbackend_index>
+  <supportticket_adminhtml_supportticket_index>
+      
+	<reference name="content">
+	  <block type="supportticket/adminhtml_supportticket" name="supportticket" />
+	</reference>
+  </supportticket_adminhtml_supportticket_index>
+  <supportticket_adminhtml_supportticketreply_index>
+	<reference name="content">
+	  <block type="supportticket/adminhtml_supportticketreply" name="supportticketreply" />
+	</reference>
+  </supportticket_adminhtml_supportticketreply_index>
+  <supportticket_adminhtml_supportticketstatus_index>
+	<reference name="content">
+	  <block type="supportticket/adminhtml_supportticketstatus" name="supportticketstatus" />
+	</reference>
+  </supportticket_adminhtml_supportticketstatus_index>
+  <supportticket_adminhtml_supportticketpriority_index>
+	<reference name="content">
+	  <block type="supportticket/adminhtml_supportticketpriority" name="supportticketpriority" />
+	</reference>
+  </supportticket_adminhtml_supportticketpriority_index>
+  <supportticket_adminhtml_supportticketdepartment_index>
+	<reference name="content">
+	  <block type="supportticket/adminhtml_supportticketdepartment" name="supportticketdepartment" />
+	</reference>
+  </supportticket_adminhtml_supportticketdepartment_index>
+</layout>

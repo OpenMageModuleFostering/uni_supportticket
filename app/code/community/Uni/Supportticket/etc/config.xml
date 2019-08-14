@@ -1,0 +1,228 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Uni_Supportticket>
+            <version>0.1.0</version>
+        </Uni_Supportticket>
+    </modules>
+    <frontend>
+        <routers>
+            <supportticket>
+                <use>standard</use>
+                <args>
+                    <module>Uni_Supportticket</module>
+                    <frontName>supportticket</frontName>
+                </args>
+            </supportticket>
+        </routers>
+        <layout>
+            <updates>
+                <supportticket>
+                    <file>supportticket.xml</file>
+                </supportticket>
+            </updates>
+        </layout>
+    </frontend>
+    <global>
+        <template>
+            <email>
+                <supportticket_email_email_template translate="label" module="supportticket">
+                    <label>Support Ticket Form</label>
+                    <file>support_ticket_form.html</file>
+                    <type>html</type>
+                </supportticket_email_email_template>
+            </email>
+        </template>
+        <template>
+            <email>
+                <supportticketreply_email_email_template translate="label" module="supportticket">
+                    <label>Support Ticket Reply</label>
+                    <file>support_ticket_reply.html</file>
+                    <type>html</type>
+                </supportticketreply_email_email_template>
+            </email>
+        </template>
+        <helpers>
+            <supportticket>
+                <class>Uni_Supportticket_Helper</class>
+            </supportticket>
+        </helpers>
+        <blocks>
+            <supportticket>
+                <class>Uni_Supportticket_Block</class>
+            </supportticket>
+            <adminhtml>
+                <rewrite>
+                    <customer_edit_tabs>Uni_Supportticket_Block_Adminhtml_Customer_Edit_Tabs</customer_edit_tabs>
+                </rewrite>
+            </adminhtml>
+        </blocks>
+        <models>
+            <supportticket>
+                <class>Uni_Supportticket_Model</class>
+                <resourceModel>supportticket_mysql4</resourceModel>
+            </supportticket>
+            <supportticket_mysql4>
+                <class>Uni_Supportticket_Model_Mysql4</class>
+                <entities>		  
+                    <supportticket>
+                        <table>uni_sprt_tkt</table>
+                    </supportticket>		  
+                    <supportticketreply>
+                        <table>uni_sprt_tkt_reply</table>
+                    </supportticketreply>		  
+                    <supportticketstatus>
+                        <table>uni_sprt_tkt_status</table>
+                    </supportticketstatus>		  
+                    <supportticketpriority>
+                        <table>uni_sprt_tkt_pri</table>
+                    </supportticketpriority>
+                    <supportticketdepartment>
+                        <table>uni_sprt_tkt_dep</table>
+                    </supportticketdepartment>
+                </entities>
+            </supportticket_mysql4>
+        </models>
+        <resources>
+            <supportticket_setup>
+                <setup>
+                    <module>Uni_Supportticket</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </supportticket_setup>
+            <supportticket_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </supportticket_write>
+            <supportticket_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </supportticket_read>
+        </resources>
+    </global>
+    <admin>
+        <routers>
+            <supportticket>
+                <use>admin</use>
+                <args>
+                    <module>Uni_Supportticket</module>
+                    <frontName>admin_supportticket</frontName>
+                </args>
+            </supportticket>
+        </routers>
+       
+    </admin>
+    <adminhtml>
+        <menu>
+            <supportticket module="supportticket">
+                <title>Support Ticket</title>
+                <sort_order>100</sort_order>
+                <children>
+                    <!--                    <supportticketbackend module="supportticket">
+                        <title>Support Ticket</title>
+                        <sort_order>0</sort_order>
+                        <action>admin_supportticket/adminhtml_supportticketbackend</action>
+                    </supportticketbackend>-->
+                    <supportticket module="supportticket">
+                        <title>View Support Ticket</title>
+                        <sort_order>0</sort_order>
+                        <action>admin_supportticket/adminhtml_supportticket</action>
+                    </supportticket>
+                    <supportticketreply module="supportticket">
+                        <title>Support Ticket Reply</title>
+                        <sort_order>100</sort_order>
+                        <action>admin_supportticket/adminhtml_supportticketreply</action>
+                    </supportticketreply>
+                                       
+                    <!--                    <report_supportticket module="supportticket">
+                        <title>Support Ticket Report</title>
+                        <sort_order>101</sort_order>
+                        <action>admin_supportticket/adminhtml_report_supportticket/index</action>
+                    </report_supportticket>-->
+                    <supportticketsetting>
+                        <title>Setting</title>
+                        <sort_order>500</sort_order>
+                        <action>adminhtml/system_config/edit/section/support_ticket_ultimate</action>
+                    </supportticketsetting>
+                    
+                    <supportticket1 module="supportticket">
+                        <title>Customization</title>
+                        <sort_order>101</sort_order>
+                        <children>
+                            <supportticketdepartment module="supportticket">
+                                <title>Department</title>
+                                <sort_order>0</sort_order>
+                                <action>admin_supportticket/adminhtml_supportticketdepartment</action>
+                            </supportticketdepartment>
+                            <supportticketpriority module="supportticket">
+                                <title>Priorities</title>
+                                <sort_order>30</sort_order>
+                                <action>admin_supportticket/adminhtml_supportticketpriority</action>
+                            </supportticketpriority>
+                            <supportticketstatus module="supportticket">
+                                <title>Statuses</title>
+                                <sort_order>20</sort_order>
+                                <action>admin_supportticket/adminhtml_supportticketstatus</action>
+                            </supportticketstatus>
+                        </children>
+                    </supportticket1>
+                </children>
+            </supportticket>
+        </menu>
+        <acl>
+            <resources>
+                <all>
+                    <title>Allow Everything</title>
+                </all>
+                <admin>
+                    <children>
+                        <supportticket translate="title" module="supportticket">
+                            <title>Supportticket</title>
+                            <sort_order>1000</sort_order>
+                            <children>
+                                <supportticketbackend translate="title">
+                                    <title>Support Ticket</title>
+                                </supportticketbackend>
+                                <supportticket translate="title">
+                                    <title>Manage Supportticket</title>
+                                    <sort_order>0</sort_order>
+                                </supportticket>
+                                <supportticketreply translate="title">
+                                    <title>Manage Supportticketreply</title>
+                                    <sort_order>10</sort_order>
+                                </supportticketreply>
+                                <supportticketstatus translate="title">
+                                    <title>Manage Supportticketstatus</title>
+                                    <sort_order>20</sort_order>
+                                </supportticketstatus>
+                                <supportticketpriority translate="title">
+                                    <title>Manage Supportticketpriority</title>
+                                    <sort_order>30</sort_order>
+                                </supportticketpriority>
+                                <supportticketdepartment translate="title">
+                                    <title>Manage Supportticketdepartment</title>
+                                    <sort_order>0</sort_order>
+                                </supportticketdepartment>
+                                <report_supportticket translate="title">
+                                    <title>Manage Supportticket Report</title>
+                                    <sort_order>0</sort_order>
+                                </report_supportticket>
+                            </children>
+                        </supportticket>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+        <layout>
+            <updates>
+                <supportticket>
+                    <file>supportticket.xml</file>
+                </supportticket>
+            </updates>
+        </layout>
+    </adminhtml>
+</config> 

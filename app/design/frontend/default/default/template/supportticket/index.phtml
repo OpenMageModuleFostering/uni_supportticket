@@ -1,0 +1,110 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     rwd_default
+ * @copyright   Copyright (c) 2014 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+
+<?php
+$_helper = Mage::helper('supportticket');
+$_status = $_helper->getTicketDepartments();
+$_prioritys = $_helper->getTicketPrioritys();
+
+echo $this->getChildHtml('supportticket_supportticket');
+$customer = Mage::getSingleton('customer/session')->getCustomer();
+?>
+<div id="messages_product_view"><?php echo $this->getMessagesBlock()->getGroupedHtml() ?></div>
+<div class="page-title">
+    <h1><?php echo $_helper->__('Create New Support Ticket') ?></h1>
+</div>
+<form action="<?php echo $this->getFormAction(); ?>" enctype="multipart/form-data" id="supportTicketForm" method="post" class="scaffold-form">
+    <div class="fieldset">
+        <p class="required"><?php echo Mage::helper('supportticket')->__('* Required Fields') ?></p>
+        <ul class="form-list">
+            <li class="fields">
+                <div class="field">
+                     <div class="input-box">
+                        <label for="ticket_department" class="select-box"><?php echo $_helper->__('Department') ?></label>
+                        <select name="ticket_department" class="required-entry">
+                            <?php foreach ($_status as $_priority1): ?>
+                                <option value="<?php echo $_priority1['value'] ?>" >
+                                    <?php echo $_priority1['label'] ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                        </label>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="field">
+                    <div class="input-box">
+                        <label for="ticket_priority" class="select-box"><?php echo $_helper->__('Priority') ?></label>
+                        <select name="ticket_priority" class="required-entry">
+                            <?php foreach ($_prioritys as $_priority): ?>
+                                <option value="<?php echo $_priority['value'] ?>" >
+                                    <?php echo $_priority['label'] ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                        </label>
+                    </div>
+                    </div>
+                </li>
+            <li>
+                <label for="ticket_subject"><?php echo Mage::helper('supportticket')->__('Subject') ?></label>
+                <div class="input-box">
+                    <input name="ticket_subject" id="ticket_subject" title="<?php echo Mage::helper('supportticket')->__('Subject') ?>" value="" class="input-text" type="text" />
+                </div>
+            </li>
+            
+            <li class="wide">
+                <label for="ticket_message" class="required"><em>*</em><?php echo Mage::helper('supportticket')->__('Message') ?></label>
+                <div class="input-box">
+                    <textarea name="ticket_message" id="ticket_message" title="<?php echo Mage::helper('supportticket')->__('Message') ?>" class="required-entry input-text" cols="5" rows="3"></textarea>
+                </div>
+            </li>
+            <li class="wide last">
+                <div class="input-box attachment">
+                    <label for="attachment"><?php echo $this->__('Attachment (10 Mb Limit)') ?></label>
+                    <div class="file-upload btn btn-primary"><span><?php echo $this->__('Upload') ?></span>
+                        <input name="attachment" id="attachment" title="<?php echo Mage::helper('supportticket')->__('ATTACHMENT') ?>"  class="input-file upload" type="file" />
+                    </div>
+
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="buttons-set">
+        <input type="hidden" name="user_name" id="user_name" value="<?php echo $customer->getName() ?>"/>
+        <input type="hidden" name="user_id" id="user_id" value="<?php echo $customer->getId() ?>"/>
+        <input type="hidden" name="ticket_id" id="ticket_id" value="<?php echo $this->generateCode(6) ?>"/>
+        <input type="hidden" name="user_email" id="user_name" value="<?php echo $customer->getEmail() ?>"/>
+        <button type="submit" title="<?php echo Mage::helper('supportticket')->__('Submit') ?>" class="button"><span><span><?php echo Mage::helper('supportticket')->__('Submit') ?></span></span></button>
+    </div>
+</form>
+<script type="text/javascript">
+//<![CDATA[
+    var supportTicketForm = new VarienForm('supportTicketForm', true);
+//]]>
+</script>

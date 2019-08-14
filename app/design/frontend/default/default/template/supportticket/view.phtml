@@ -1,0 +1,101 @@
+
+<?php
+$id = $this->getRequest()->getParam('id');
+$_info = $this->getTicketInfo($id);
+//Zend_Debug::dump($_info);exit;
+$tick_department = Mage::helper('supportticket')->getTicketDepartments();
+$tick_status = Mage::helper('supportticket')->getTicketStatuses();
+$tick_priority = Mage::helper('supportticket')->getTicketPrioritys();
+$customer_data = Mage::getSingleton('customer/session')->getCustomer();
+$status = $_info->getData('ticket_status');
+//Zend_Debug::dump($_info);
+?>
+<div id="messages_product_view"><?php echo $this->getMessagesBlock()->getGroupedHtml() ?></div>
+<div class="page-title">
+    <h1>[<?php echo $_info->getData('ticket_id') ?>]</h1>
+</div>
+<div class="ticket-info">
+    <ul>
+        <?php
+        foreach ($tick_department as $value):
+            if ($_info['department'] == $value['value']) :
+                ?>
+                <li><b><?php echo Mage::helper('supportticket')->__('Department : ') ?></b><span><i><?php echo $value['label'] ?></i></span></li>
+                <?php
+            endif;
+        endforeach;
+        ?>
+        <?php
+        foreach ($tick_status as $value):
+            if ($_info['ticket_status'] == $value['value']) :
+                ?>
+                <li><b><?php echo Mage::helper('supportticket')->__('Status : ') ?></b><span><i><?php echo $value['label'] ?></i></span></li>
+                <?php
+            endif;
+        endforeach;
+        ?>
+        <?php
+        foreach ($tick_priority as $value):
+            if ($_info['ticket_priority'] == $value['value']) :
+                ?>
+                <li><b><?php echo Mage::helper('supportticket')->__('Priority : ') ?></b><span><i><?php echo $value['label'] ?></i></span></li>
+                <?php
+            endif;
+        endforeach;
+        ?>
+    </ul>
+
+
+</div>
+<?php if ((int) $status !== 3) { ?>
+    <form action="<?php echo $this->getFormAction(); ?>" enctype="multipart/form-data" id="supportTicketReplyForm" method="post" class="scaffold-form">
+        <div class="fieldset">
+            <p class="required"><?php echo Mage::helper('supportticket')->__('* Required Fields') ?></p>
+            <ul class="form-list">
+                <li class="wide">
+                    <label for="ticket_replies" class="required"><em>*</em><?php echo Mage::helper('supportticket')->__('Post a reply') ?></label>
+                    <div class="input-box">
+                        <textarea name="ticket_replies" id="ticket_replies" title="<?php echo Mage::helper('supportticket')->__('Post a reply') ?>" class="required-entry input-text" cols="5" rows="3"></textarea>
+                    </div>
+                </li>
+                <li class="wide last">
+                    <div class="input-box attachment">
+                        <div class="file-upload btn btn-primary"><span><?php echo $this->__('Upload')?> </span>
+                            <input name="ticket_attachment" id="ticket_attachment" title="<?php echo Mage::helper('supportticket')->__('ATTACHMENT') ?>"  class="input-file upload" type="file" />
+                        </div>
+                        <label class="attachment-label" for="ticket_attachment"><?php echo Mage::helper('supportticket')->__('ATTACHMENT (if any)') ?></label>
+
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="buttons-set">
+            <input type="hidden" id="ticket_id" name="ticket_id" value="<?php echo $_info->getData('ticket_id') ?>"/>
+            <input type="hidden" id="id" name="id" value="<?php echo $_info->getData('entity_id') ?>"/>
+            <input type="hidden" id="user_name" name="user_name" value="<?php echo $customer_data->getName() ?>"/>
+            <input type="hidden" id="user_id" name="user_id" value="<?php echo $customer_data->getId() ?>"/>
+            <button type="submit" title="<?php echo Mage::helper('supportticket')->__('Post reply') ?>" class="button"><span><span><?php echo Mage::helper('supportticket')->__('Post Reply') ?></span></span></button>
+            <button type="button" ticketid="<?php echo $id; ?>" onclick="closeTicket(this);" title="<?php echo Mage::helper('supportticket')->__('Close Ticket') ?>" class="button"><span><span><?php echo Mage::helper('supportticket')->__('Close Ticket') ?></span></span></button>
+        </div>
+    </form>
+<?php } else { ?>
+    <h1><p>This Ticket has been closed.</p></h1>
+<?php } ?>
+<a href="<?php echo $this->getUrl('supportticket') ?>"><span><?php echo $this->__('Back to my Support Ticket') ?></span></a>
+
+<script type="text/javascript">
+//<![CDATA[
+    var supportTicketReplyForm = new VarienForm('supportTicketReplyForm', true);
+//]]>
+
+    function closeTicket(obj) {
+        var id = jQuery(obj).attr('ticketid');
+        var url = "<?php echo $this->getUrl('supportticket/supportticket/closeticket'); ?>";
+        if (confirm("You are going to close the ticket!") == true) {
+            window.location.href = url + 'id/' + id;
+        }
+    }
+
+</script>
+<?php
+echo $this->getChildHtml('supportticket_supportticketreply'); ?>
