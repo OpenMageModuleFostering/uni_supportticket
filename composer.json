@@ -3,8 +3,7 @@
     "type": "magento-module",
     "license": "Open-Software-License-(OSL)",
     "homepage": "",
-    "description": "Magento Support Ticket module provides the facility to submit a ticket assigned to specific department, priority and revert back with explanatory information.
-",
+    "description": "The extension is capable of collecting the information from various customer groups. Customer just have to post their request, the extension will fetch the request and shown on admin panel plus an email sent to the concerned authority.",
     "authors": [
     {
         "name": "Unicode Systems",

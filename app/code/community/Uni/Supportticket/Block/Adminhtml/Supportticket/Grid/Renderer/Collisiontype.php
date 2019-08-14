@@ -8,7 +8,7 @@ class Uni_Supportticket_Block_Adminhtml_Supportticket_Grid_Renderer_Collisiontyp
         $title = $collection->load($value)->getTitle();
         $color = $collection->load($value)->getFontColor();
         $color1 = $collection->load($value)->getBackgroundColor();
-        return '<span style="color:' . $color . '; background-color:' . $color1 . '"><b>' . $title . '</b></span>';
+        return '<span style="color:' .$color . '; background-color:' .$color1 . '"><b>' . $title . '</b></span>';
     }
 
 }

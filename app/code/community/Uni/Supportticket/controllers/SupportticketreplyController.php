@@ -47,7 +47,7 @@ class Uni_Supportticket_SupportticketreplyController extends Mage_Core_Controlle
                 if (isset($_FILES['ticket_attachment']['name']) and (file_exists($_FILES['ticket_attachment']['tmp_name']))) {
                     try {
                         $uploader = new Varien_File_Uploader('ticket_attachment');
-//                        $uploader->setAllowedExtensions(array('doc', 'docx', 'pdf', 'jpg', 'jpeg', 'png', 'bmp', 'gif'));
+                        $uploader->setAllowedExtensions(array('doc', 'docx', 'pdf', 'jpg', 'jpeg', 'png', 'bmp', 'gif'));
                         $uploader->setAllowRenameFiles(false);
                         $uploader->setFilesDispersion(false);
                         $filename = "File-" . time() . $_FILES['ticket_attachment']['name'];

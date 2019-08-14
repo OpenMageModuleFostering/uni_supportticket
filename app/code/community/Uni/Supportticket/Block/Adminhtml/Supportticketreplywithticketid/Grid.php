@@ -18,6 +18,7 @@ class Uni_Supportticket_Block_Adminhtml_Supportticketreplywithticketid_Grid exte
     }
 
     protected function _prepareColumns() {
+        
         $this->addColumn("entity_id", array(
             "header" => Mage::helper("supportticket")->__("ID"),
             "align" => "right",
@@ -54,7 +55,7 @@ class Uni_Supportticket_Block_Adminhtml_Supportticketreplywithticketid_Grid exte
         $this->addColumn("is_admin", array(
             "header" => Mage::helper("supportticket")->__("User Role"),
             "index" => "is_admin",
-            'renderer' => new Uni_Supportticket_Block_Adminhtml_Supportticketreplywithticketid_Renderer_Userrole,
+            'renderer' => new Uni_Supportticket_Block_Adminhtml_Supportticketreplywithticketid_Renderer_Userrole(),
         ));
 //        $this->addExportType('*/*/exportCsv', Mage::helper('sales')->__('CSV'));
 //        $this->addExportType('*/*/exportExcel', Mage::helper('sales')->__('Excel'));

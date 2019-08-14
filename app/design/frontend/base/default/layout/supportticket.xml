@@ -9,6 +9,8 @@
     </reference>   
   </supportticket_index_index>  
   
+  
+  
   <supportticket_supportticket_index>
 <update handle="customer_account"/>
     <reference name="my.account.wrapper">
@@ -18,13 +20,26 @@
     </reference>
   </supportticket_supportticket_index> 
   
+  
+  
   <supportticket_supportticketreply_index>
     <reference name="root">   
       <action method="setTemplate"><template>page/1column.phtml</template></action>   
     </reference>   
     <reference name="content">   
+      <!--<block type="supportticket/supportticketreply" name="supportticket_supportticketreply" template="supportticket/supportticketreply.phtml"/>-->   
     </reference>
   </supportticket_supportticketreply_index>
+  
+  
+<!--  <supportticket_supportticket_view>
+    <reference name="root">   
+      <action method="setTemplate"><template>page/1column.phtml</template></action>   
+    </reference>   
+    <reference name="content">   
+      <block type="supportticket/supportticket" name="supportticket_supportticketview" template="supportticket/view.phtml"/>   
+    </reference>
+  </supportticket_supportticket_view>-->
   
   <customer_account>
         <reference name="customer_account_navigation">

@@ -43,9 +43,9 @@ class Uni_Supportticket_SupportticketController extends Mage_Core_Controller_Fro
             try {
                 $error = false;
 
-//                if (!Zend_Validate::is(trim($post_data['ticket_subject']), 'NotEmpty')) {
-//                    $error = true;
-//                }
+                if (!Zend_Validate::is(trim($post_data['ticket_subject']), 'NotEmpty')) {
+                    $error = true;
+                }
                 if (!Zend_Validate::is(trim($post_data['ticket_message']), 'NotEmpty')) {
                     $error = true;
                 }
@@ -53,7 +53,7 @@ class Uni_Supportticket_SupportticketController extends Mage_Core_Controller_Fro
                 if (isset($_FILES['attachment']['name']) and (file_exists($_FILES['attachment']['tmp_name']))) {
                     try {
                         $uploader = new Varien_File_Uploader('attachment');
-//                        $uploader->setAllowedExtensions(array('doc', 'docx', 'pdf', 'jpg', 'jpeg', 'png', 'bmp', 'gif'));
+                        $uploader->setAllowedExtensions(array('doc', 'docx', 'pdf', 'jpg', 'jpeg', 'png', 'bmp', 'gif'));
                         $uploader->setAllowRenameFiles(false);
                         $uploader->setFilesDispersion(false);
                         $filename = "File-" . time() . $_FILES['attachment']['name'];

@@ -1,0 +1,47 @@
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<?php
+//$_datasets = $this->getDatasets(); 
+$customerData = Mage::getSingleton('customer/session')->getCustomer();
+$tick = $this->getCurrentTicketId($this->getRequest()->getParam('id'));
+$_datasets = $this->getDatasets()->addFieldToFilter('user_id', $customerData->getId())->addFieldToFilter('ticket_id', $tick)->getData();
+//Zend_Debug::dump($_datasets);
+?>
+<div class="page-head">
+    <h3><?php echo $this->__('Support ticket reply') ?></h3>
+</div>
+<?php echo $this->getPagerHtml(); ?>
+<?php if (count($_datasets)): ?>
+    <table cellspacing="0" class="data-table" id="data-table">
+        <thead>
+            <tr>
+                <th><?php echo $this->__('ticket id') ?></th>
+                <th><?php echo $this->__('Reply Time') ?></th>
+                <th><?php echo $this->__('ticket attachment') ?></th>
+                <th><?php echo $this->__('ticket replies') ?></th>
+                <th> &nbsp; </th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($_datasets as $_dataset): ?>
+                <tr>
+                    <td  valign="middle"   style="vertical-align:middle;"><?php echo $_dataset['ticket_id'] ?></td>
+                    <td  valign="middle"   style="vertical-align:middle;"><?php echo $_dataset['reply_time'] ?></td>
+                    <td  valign="middle"   style="vertical-align:middle;">
+                        <?php
+                        if ($_dataset['ticket_attachment'] == 'No Attachment Found') {
+                            echo $_dataset['ticket_attachment'];
+                        } else {
+                            ?>
+                            <a href="<?php echo $this->getUrl('supportticket/supportticketreply/download', array('entity_id' => $_dataset['entity_id'])) ?>"><?php echo $_dataset['ticket_attachment'] ?></a>
+        <?php } ?>
+                    </td>
+                    <td  valign="middle"   style="vertical-align:middle;"><?php echo $_dataset['ticket_replies'] ?></td>
+                </tr>
+    <?php endforeach; ?>
+        </tbody>
+    </table>
+    <script type="text/javascript">decorateTable('data-table')</script>
+    <?php echo $this->getPagerHtml(); ?>
+<?php else: ?>
+    <p><?php echo $this->__('You have submited no data.'); ?></p>
+<?php endif ?>

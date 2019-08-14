@@ -5,6 +5,7 @@ class Uni_Supportticket_IndexController extends Mage_Core_Controller_Front_Actio
      * Display support ticket block on frontend
      */    
     public function IndexAction() {
+        if (Mage::getSingleton('customer/session')->isLoggedIn() == 1){
 	  $this->loadLayout();   
 	  $this->getLayout()->getBlock("head")->setTitle($this->__("Support Ticket"));
 	        $breadcrumbs = $this->getLayout()->getBlock("breadcrumbs");
@@ -20,6 +21,10 @@ class Uni_Supportticket_IndexController extends Mage_Core_Controller_Front_Actio
 		   ));
 
       $this->renderLayout(); 
+        }
+        else {
+            $this->_redirect();
+        }
 	  
     }
 }

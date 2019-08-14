@@ -1,7 +1,3 @@
-<?php 
-
-?>
-
 <?php
 
 class Uni_Supportticket_Helper_Data extends Mage_Core_Helper_Abstract {
