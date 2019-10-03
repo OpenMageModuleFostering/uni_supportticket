@@ -1,16 +1,19 @@
 {
-    "name": "OpenMageModuleFostering/Uni_Supportticket",
+    "name": "OpenMageModuleFostering\/Uni_Supportticket",
     "type": "magento-module",
     "license": "Open-Software-License-(OSL)",
     "homepage": "",
     "description": "The extension is capable of collecting the information from various customer groups. Customer just have to post their request, the extension will fetch the request and shown on admin panel plus an email sent to the concerned authority.",
     "authors": [
-    {
-        "name": "Unicode Systems",
-        "email": "magento@unicodesystems.in"
-    }
-],
+        {
+            "name": "Unicode Systems",
+            "email": "magento@unicodesystems.in"
+        }
+    ],
     "suggest": {
-        "magento-hackathon/magento-composer-installer": "*"
-    }
+        "magento-hackathon\/magento-composer-installer": "*"
+    },
+    "keywords": [
+        "openmage-module"
+    ]
 }
